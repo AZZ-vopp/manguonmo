@@ -216,11 +216,7 @@ func (c *APIClient) GetUserList() (UserList *[]api.UserInfo, err error) {
 		user := api.UserInfo{}
 		user.UID = response.Get("data").GetIndex(i).Get("id").MustInt()
 
-		if (c.SpeedLimit > 0) {
-			user.SpeedLimit = uint64(c.SpeedLimit * 1000000 / 8)
-		} else {
-			user.SpeedLimit = uint64(response.Get("data").GetIndex(i).Get("speed_limit").MustInt() * 1000000 / 8)
-		}
+		
 		
 		user.DeviceLimit = c.DeviceLimit
 		switch c.NodeType {
